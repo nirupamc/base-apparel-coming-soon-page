@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Base Apparel coming soon page</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  
+</head>
+<body>
+
+  <header role="banner">
+    <h1 class="visually-hidden">Base Apparel Coming Soon</h1>
+    <a href="/" title="return to the homepage" id="logo">
+      <img src="./logo.svg" alt="Base Apparel Logo">
+    </a>
+  </header>
+  <section class="side-image"></section>
+  <main class="[ main ] [ flow ]">
+    <h2>
+     <span class="heading--pink">
+        We're
+     </span>
+     coming soon
+    </h2>
+    <p>
+      Hello fellow shoppers! We're currently building our new fashion store. 
+      Add your email below to stay up-to-date with announcements and our launch deals.
+    </p>
+    <form action="/" class="[ form ] [ flow ]" method="POST" id="form">
+      <div class="form__control">
+        <input type="email"
+                name="email"
+                id="email"
+                value=""
+                autocapitalize="none"
+                autocomplete="false"
+                autocorrect="off"
+                required
+                pattern="[^@]+@[^\.]+\..+" />
+        <label for="email">Email Address</label>
+        <button class="button">
+          <span class="visually-hidden">Submit email</span>
+          <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="12" height="20"><path fill="none" stroke="#FFF" stroke-width="2" d="M1 1l8.836 8.836L1 18.671" /></svg>
+        </button>
+        <div class="alert_icon"></div>
+      </div>
+    </form>
+    <div aria-atomic="true" role="alert" class="form__alert"></div>
+  </main>
+ 
+
+  
+  <footer>
+    <p class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Nirupam Changmai</a>.
+    </p>
+  </footer>
+</body>
+<script>
+  const form  = document.getElementsByTagName('form')[0];
+const email = document.getElementById('mail');
+const emailError = document.querySelector('div.error');
+const iconError = document.getElementById('error-icon');
+email.addEventListener('input', function (event) {
+  if (email.validity.valid) {
+    emailError.innerHTML = ''; // Reset the content of the message
+    emailError.className = 'error'; // Reset the visual state of the message
+    iconError.style.display = 'none';
+  } else {
+    showError();
+  }
+});
+
+form.addEventListener('submit', function (event) {
+  if(!email.validity.valid) {
+    showError();
+    event.preventDefault();
+  }
+});
+
+function showError() {
+  if(email.validity.valueMissing) {
+    emailError.textContent = 'You need to enter an e-mail address.';
+  } else if(email.validity.typeMismatch) {
+    emailError.textContent = 'Please provide a valid e-mail address.';
+  } else if(email.validity.tooShort) {
+    emailError.textContent = `Email should be at least ${ email.minLength } characters; you entered ${ email.value.length }.`;
+  }
+
+  iconError.style.display = 'inline';
+  emailError.className = 'error active';
+}
+</script>
+</html>
